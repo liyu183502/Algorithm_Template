@@ -21,7 +21,7 @@ void solve(){
     for (int i = 1; i <= m; i ++ ){
 		int u, v, w;
         cin >> u >> v >> w;
-        e.pb{u, v, w};
+        e.pb({u, v, w});
     }
     sort(all(e));
 
