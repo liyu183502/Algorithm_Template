@@ -2,8 +2,8 @@
 ## 区别：1.优先队列q存pii
 ```cpp
 	vector<vector<pii>> g(n + 1);
-	vi d(n + 1, inf);
-	for (int i = 1; i <= m; i ++ ){
+	vector<int> d(n + 1, inf);
+	for (int i = 1; i <= m; i++) {
 		int a, b, c;
 		cin >> a >> b >> c;
 		f[a].pb({b, c});
@@ -17,7 +17,7 @@
 		auto t = q.top();  //top
 		int u = t.second;
 		q.pop();
-		for (auto [v, w] : f[u]){
+		for (auto [v, w] : g[u]){
 			if(d[v] > d[u] + w){
 				d[v] = d[u] + w;
 				q.push({d[v], v});
