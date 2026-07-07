@@ -1,3 +1,4 @@
+```cpp
 template<class T, class Opt>
 struct RMQ {
     int n;
@@ -29,3 +30,7 @@ struct RMQ {
         return opt(a[k][l], a[k][r - (1 << k) + 1]);
     }
 };
+```
+
+例题：
+https://codeforces.com/contest/2241/problem/G
