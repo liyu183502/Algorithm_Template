@@ -1,5 +1,5 @@
 ```cpp
-int s[N]; // 区间和
+int s[N]; //这个数组就是树状数组
 int lowbit(int x){
     return x & -x;
 }
