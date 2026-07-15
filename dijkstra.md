@@ -8,7 +8,7 @@
 		f[a].pb({b, c});
 		g[b].pb({a, c});
 	}
-
+	
 	vector<int> d(n + 1, INF);
 	priority_queue<pii, vector<pii>, greater<pii>> q;
 	q.push({0, 1});
