@@ -5,8 +5,8 @@
 	for (int i = 1; i <= m; i++) {
 		int a, b, c;
 		cin >> a >> b >> c;
-		f[a].pb({b, c});
-		g[b].pb({a, c});
+		f[a].push_back({b, c});
+		g[b].push_back({a, c});
 	}
 	
 	vector<int> d(n + 1, INF);

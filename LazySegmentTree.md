@@ -3,7 +3,7 @@ Tag = 懒标记存什么修改
 operator+ = 左右儿子怎么合并
 apply = 这个修改怎么作用到节点上
 tag apply = 把新标记t叠加到当前标记上
-Info apply = 将懒标记作用到当前区间
+Info apply = 将懒标记作用到当前区间（发挥作用，相当于下传了）
 
 ```cpp
 

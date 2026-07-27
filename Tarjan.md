@@ -17,7 +17,7 @@ void solve(){
 		g[u].push_back(v);
 	}
 
-	vector<int> dfn(n + 1), low(n + 1), bel(n + 1), siz(n + 1);
+	vector<int> dfn(n + 1), low(n + 1), bel(n + 1), sz(n + 1);
 	vector<int> stk;
 	vector<bool> vis(n + 1);
 	int tim = 0, scc = 0;
@@ -45,7 +45,7 @@ void solve(){
 
 				vis[v] = false;
 				bel[v] = scc;
-				siz[scc]++;
+				sz[scc]++;
 
 				if(v == u) break;
 			}

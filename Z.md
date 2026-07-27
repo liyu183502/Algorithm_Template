@@ -1,73 +1,89 @@
+
 template<class T>
-constexpr T power(T a, unsigned long long b, T res = 1) {
-	for (; b != 0; b /= 2, a *= a) {
-		if (b & 1) res *= a;
-	}
+T power(T a, int b) {
+	T res = 1;
+	for (; b; b >>= 1, a *= a)
+		if(b & 1) res *= a;
 	return res;
 }
 
-template<class U, U P>
-struct ModIntBase {
-public:
-	U x;
-	constexpr ModIntBase() : x(0) {}
-	constexpr ModIntBase(long long x_) {
-		long long v = x_ % (long long)P;
-		if (v < 0) v += (long long)P;
-		x = (U)v;
+template<int P>
+struct MInt {
+	int x;
+
+	MInt(int x = 0) : x((x % P + P) % P) {}
+
+	int val() const {
+		return x;
 	}
-	constexpr static U mod() { return P; }
-	constexpr U val() const { return x; }
-	constexpr ModIntBase operator-() const {
-		return ModIntBase(x == 0 ? 0 : P - x);
-	}
-	constexpr ModIntBase inv() const {
+
+	MInt inv() const {
 		return power(*this, P - 2);
 	}
-	constexpr ModIntBase &operator*=(const ModIntBase &rhs) & {
-		x = (unsigned long long)x * rhs.x % P;
+
+	MInt operator-() const {
+		return MInt(-x);
+	}
+
+	MInt &operator+=(const MInt &t) {
+		x += t.x;
+		if(x >= P) x -= P;
 		return *this;
 	}
-	constexpr ModIntBase &operator+=(const ModIntBase &rhs) & {
-		x += rhs.x;
-		if (x >= P) x -= P;
+
+	MInt &operator-=(const MInt &t) {
+		x -= t.x;
+		if(x < 0) x += P;
 		return *this;
 	}
-	constexpr ModIntBase &operator-=(const ModIntBase &rhs) & {
-		if (x < rhs.x) x += P;
-		x -= rhs.x;
+
+	MInt &operator*=(const MInt &t) {
+		x = (i128)x * t.x % P;
 		return *this;
 	}
-	constexpr ModIntBase &operator/=(const ModIntBase &rhs) & {
-		return *this *= rhs.inv();
+
+	MInt &operator/=(const MInt &t) {
+		return *this *= t.inv();
 	}
-	friend constexpr ModIntBase operator*(ModIntBase lhs, const ModIntBase &rhs) {
-		return lhs *= rhs;
+
+	friend MInt operator+(MInt a, const MInt &b) {
+		return a += b;
 	}
-	friend constexpr ModIntBase operator+(ModIntBase lhs, const ModIntBase &rhs) {
-		return lhs += rhs;
+
+	friend MInt operator-(MInt a, const MInt &b) {
+		return a -= b;
 	}
-	friend constexpr ModIntBase operator-(ModIntBase lhs, const ModIntBase &rhs) {
-		return lhs -= rhs;
+
+	friend MInt operator*(MInt a, const MInt &b) {
+		return a *= b;
 	}
-	friend constexpr ModIntBase operator/(ModIntBase lhs, const ModIntBase &rhs) {
-		return lhs /= rhs;
+
+	friend MInt operator/(MInt a, const MInt &b) {
+		return a /= b;
 	}
-	friend istream &operator>>(istream &is, ModIntBase &a) {
-		long long v;
-		is >> v;
-		a = ModIntBase(v);
-		return is;
+
+	friend bool operator==(const MInt &a, const MInt &b) {
+		return a.x == b.x;
 	}
-	friend ostream &operator<<(ostream &os, const ModIntBase &a) {
-		return os << a.val();
+
+	friend bool operator!=(const MInt &a, const MInt &b) {
+		return a.x != b.x;
 	}
-	friend bool operator==(const ModIntBase &lhs, const ModIntBase &rhs) {
-		return lhs.val() == rhs.val();
+
+	friend bool operator<(const MInt &a, const MInt &b) {
+		return a.x < b.x;
 	}
-	friend bool operator!=(const ModIntBase &lhs, const ModIntBase &rhs) {
-		return lhs.val() != rhs.val();
+
+	friend istream &operator>>(istream &in, MInt &a) {
+		int x;
+		in >> x;
+		a = x;
+		return in;
+	}
+
+	friend ostream &operator<<(ostream &out, const MInt &a) {
+		return out << a.x;
 	}
 };
 
-using Z = ModIntBase<unsigned int, (unsigned int)p>;
+using Z = MInt<998244353>;
