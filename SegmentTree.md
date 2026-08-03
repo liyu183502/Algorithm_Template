@@ -1,6 +1,7 @@
 ## segment（优化算法，用于暴力很简单，但是复杂度高的题目）
 应用场景：1.多次查询，单点或区间修改，2.判断能否使用：关键在于区间能否状态转移  
 ```cpp
+
 template<class Info>
 struct SegmentTree {
 	int n;
@@ -77,6 +78,7 @@ struct Info {
 Info operator+(const Info &a, const Info & b) {
 	return {min(a.mn, b.mn)};
 }
+
 ```
 
 
