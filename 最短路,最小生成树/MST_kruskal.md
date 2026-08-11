@@ -9,7 +9,7 @@ struct edge{
 	}
 };
 
-int find(int x){
+int find(int x) {
 	return fa[x] == x ? x : fa[x] = find(fa[x]);
 }
 
@@ -27,7 +27,7 @@ void solve(){
     sort(e.begin(), e.end());
 
     int sum = 0;
-    for (auto [u, v, w] : e){
+    for (auto [u, v, w] : e) {
 		int x = find(u), y = find(v);
 		if(x != y){
 			fa[x] = y;
