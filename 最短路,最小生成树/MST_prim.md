@@ -1,31 +1,41 @@
 #### prim
 ```cpp
-const int N = 110;
-int g[N][N], d[N], vis[N], cnt, ans;
+void solve() {
+	int n, m;
+	cin >> n >> m;
 
-bool prim(int s) {
-    memset(g, 0x3f, sizeof g);
-    memset(d, 0x3f, sizeof d);
-    d[s] = 0;
+	vector<vector<int>> g(n + 1, vector<int>(n + 1, inf));
+	for (int i = 1; i <= n; i++) g[i][i] = 0;
 
-    for (int i = 1; i <= n; i++) {
-        int u = -1;
-        for (int j = 1; j <= n; j++) {
-            if(!vis[j] && (u == -1 || d[j] < d[u])) {
-                u = j;
-            }
-        }
-        vis[u] = 1;
-        ans += d[u];
-        cnt ++;
+	for (int i = 1; i <= m; i++) {
+		int u, v, w;
+		cin >> u >> v >> w;
+		g[u][v] = g[v][u] = min(g[u][v], w);
+	}
 
-        if(d[u] == inf) return 0;
-        for (int j = 1; j <= n; j++) {
-            if(d[j] > g[j][u]){
-                d[j] = g[j][u];
-            }
-        }
-    }
-    return cnt == n;
+	vector<int> d(n + 1, inf), vis(n + 1);
+	d[1] = 0;
+
+	int ans = 0;
+	for (int i = 1; i <= n; i++) {
+		int u = 0;
+		for (int j = 1; j <= n; j++) {
+			if(!vis[j] && (!u || d[j] < d[u])) u = j;
+		}
+
+        // 不连通
+		if(d[u] == inf) {
+			cout << -1 << endl;
+			return;
+		}
+
+		vis[u] = 1;
+		ans += d[u];
+
+		for (int v = 1; v <= n; v++)
+			d[v] = min(d[v], g[u][v]);
+	}
+
+	cout << ans << endl;
 }
 ```

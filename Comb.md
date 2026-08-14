@@ -1,3 +1,4 @@
+```cpp
 struct Comb {
     int n;
     vector<Z> _fac;
@@ -62,3 +63,10 @@ struct Comb {
         return fac(n) * invfac(n - m);
     }
 } comb;
+```
+
+## 性质1
+$\binom{n}{m}\text{奇数}\iff m\&(n-m)=0 \iff m\&n=m$
+
+## 性质2
+$\forall\,0\le m\le n,\binom{n}{m}\text{奇数}\iff n=2^k-1$
