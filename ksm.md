@@ -1,5 +1,6 @@
 ```cpp
-int ksm(int a, int n){
+int ksm(int a, int n) {
+    a %= p;
     int res = 1;
     while(n){
         if(n & 1) res = a * res % p;
