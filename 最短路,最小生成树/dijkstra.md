@@ -1,5 +1,5 @@
 ## dijkstra  
-## 区别：1.优先队列q存pii
+区别：1.优先队列q存pii
 ```cpp
 	vector<vector<pii>> g(n + 1);
 	for (int i = 1; i <= m; i++) {

@@ -141,3 +141,30 @@ Info operator+(const Info &a, const Info &b) {
 	return {a.sum + b.sum, a.len + b.len};
 }
 ```
+
+```cpp
+struct Tag {
+	// 修改信息
+
+	void apply(const Tag &v) {
+		// 原来的 tag，再执行 v
+	}
+};
+
+struct Info {
+	// 查询信息
+
+	void apply(const Tag &v) {
+		// 整个区间执行 v 后
+		// Info 怎么变化
+	}
+
+};
+Info operator+(const Info &a, const Info &b) {
+	Info c;
+
+	// 左右区间合并
+
+	return c;
+}
+```
