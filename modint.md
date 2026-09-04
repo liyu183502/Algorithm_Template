@@ -1,4 +1,4 @@
-
+```cpp
 template<class T>
 T power(T a, int b) {
 	T res = 1;
@@ -87,3 +87,4 @@ struct MInt {
 };
 
 using Z = MInt<998244353>;
+```

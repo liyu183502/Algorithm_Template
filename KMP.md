@@ -4,6 +4,8 @@
 s 主串， t 子串
 
 0 下标
+
+KMP 的 fail：当前位置结尾，最长的相同前后缀
 ```cpp
 vector<int> get_nxt(string s) {
 	int n = s.size();
@@ -40,3 +42,4 @@ vector<int> kmp(string s, string t) {
 	return ans;
 }
 ```
+

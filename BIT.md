@@ -40,39 +40,37 @@ struct Fenwick {
 
 ## 前缀最大值
 ```cpp
-struct Fenwick {
-    int n;
-    vector<int> bit;
+struct BITMax {
+	int n;
+	vector<int> bit;
 
-    Fenwick(int n = 0) {
-        init(n);
-    }
+	BITMax(int n_) {
+		init(n_);
+	}
 
-    void init(int n_) {
-        n = n_;
-        bit.assign(n + 1, 0);
-    }
+	void init(int n_) {
+		n = n_;
+		bit.assign(n + 1, -inf);
+	}
 
-    void change(int idx, int val) {
-        while (idx <= n) {
-            bit[idx] = max(bit[idx], val);
-            idx += idx & -idx;
-        }
-    }
+	void update(int x, int v) {
+		for (int i = x; i <= n; i += i & -i) {
+			bit[i] = max(bit[i], v);
+		}
+	}
 
-    int query(int idx) {
-        int res = 0;
-        while (idx > 0) {
-            res = max(res, bit[idx]);
-            idx -= idx & -idx;
-        }
-        return res;
-    }
+	int query(int x) {
+		int res = -inf;
+		for (int i = x; i; i -= i & -i) {
+			res = max(res, bit[i]);
+		}
+		return res;
+	}
 };
 ```
 
 ```cpp
-int s[N]; //这个数组就是树状数组
+int s[N];
 int lowbit(int x){
     return x & -x;
 }
